@@ -16,7 +16,7 @@ podTemplate(label: 'jenkins-pipeline', containers: [
 volumes:[
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
     hostPathVolume(mountPath: '/root/.m2/', hostPath: '/tmp/jenkins/.m2'),
-], nodeSelector: 'beta.kubernetes.io/os=linux') {
+], nodeSelector: 'cloud.google.com/gke-nodepool=devops-pool') {
      
   node ('jenkins-pipeline') {
 
