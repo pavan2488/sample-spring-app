@@ -55,11 +55,11 @@ volumes:[
 
       container('maven') {
             
-            withSonarQubeEnv('SonarQube-Bitwise') {
+
                
                sh 'mvn  clean install'
                            
-            }
+
 
       }
     }
