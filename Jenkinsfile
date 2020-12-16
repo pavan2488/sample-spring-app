@@ -91,10 +91,10 @@ volumes:[
 
     container(name: 'kaniko', shell: '/busybox/sh') {
       sh '''#!/busybox/sh
-            /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage
+            /kaniko/executor -f `pwd` ${item.imagename} -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage
             '''
     }
-
+/*
     stage ('publish container') {
 
       container('docker') {
@@ -112,7 +112,7 @@ volumes:[
 
       }
 
-    }
+    } */
 
 
     // deploy only the master branch
