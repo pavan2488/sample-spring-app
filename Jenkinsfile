@@ -90,9 +90,8 @@ volumes:[
     } */
 
    container(name: 'kaniko', shell: '/busybox/sh') {
-      sh '''#!/busybox/sh
-            /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage
-            '''
+              
+             sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=mydockerregistry:5000/myorg/myimage"
     }
 /*
     stage ('publish container') {
