@@ -17,8 +17,10 @@ volumes:[
 ], nodeSelector: 'beta.kubernetes.io/os=linux') {
      
   node ('jenkins-pipeline') {
-    
-      
+
+
+    checkout scm
+
     def pwd = pwd()
     def chart_dir = "${pwd}/charts/spring-demo"
      
