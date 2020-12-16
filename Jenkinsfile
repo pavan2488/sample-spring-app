@@ -91,7 +91,7 @@ volumes:[
 
    container(name: 'kaniko', shell: '/busybox/sh') {
               
-             sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=mydockerregistry:5000/myorg/myimage"
+             sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destinationgcr.io/savvy-folio-279711/spring-demo"
     }
 /*
     stage ('publish container') {
