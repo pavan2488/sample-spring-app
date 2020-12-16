@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-@Library('github.com/pushkar-bitwise/jenkins-pipeline@master')
+@Library('sharedlibs')
 
 def pipeline = new io.bitwise.Pipeline()
 
