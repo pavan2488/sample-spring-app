@@ -91,7 +91,7 @@ volumes:[
 
     container(name: 'kaniko', shell: '/busybox/sh') {
       sh '''#!/busybox/sh
-            /kaniko/executor -f `pwd` ${item.imagename} -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage
+            /kaniko/executor -f `pwd` ${config.container_repo.dockerfile} -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage
             '''
     }
 /*
