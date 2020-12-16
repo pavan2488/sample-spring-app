@@ -51,7 +51,7 @@ volumes:[
     // compile tag list
     def image_tags_list = pipeline.getMapValues(image_tags_map)
 
-    stage ('compile and test') {
+   /*stage ('compile and test') {
 
       container('maven') {
             
@@ -87,6 +87,12 @@ volumes:[
         )
 
       }
+    } */
+
+    container(name: 'kaniko', shell: '/busybox/sh') {
+      sh '''#!/busybox/sh
+            /kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage
+            '''
     }
 
     stage ('publish container') {
