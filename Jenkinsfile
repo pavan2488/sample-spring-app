@@ -5,7 +5,7 @@
 def pipeline = new io.bitwise.Pipeline()
 
 podTemplate(label: 'jenkins-pipeline', containers: [
-        containerTemplate(name: 'jnlp', image: 'lachlanevenson/jnlp-slave:3.10-1-alpine', args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins', resourceRequestCpu: '200m', resourceLimitCpu: '500m', resourceRequestMemory: '512Mi', resourceLimitMemory: '1024Mi'),
+        containerTemplate(name: 'jnlp', image: 'lachlanevenson/jnlp-slave:3.10-1-alpine', args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins', resourceRequestCpu: '200m', resourceLimitCpu: '1', resourceRequestMemory: '1024Mi', resourceLimitMemory: '2048Mi'),
         containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: 'cat', ttyEnabled: true,   envVars: [
           secretEnvVar(key: 'GOOGLE_APPLICATION_CREDENTIALS', secretName: 'devops-gcr-key-key', secretKey: 'key.json') 
         ]),
