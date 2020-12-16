@@ -12,7 +12,7 @@ podTemplate(label: 'jenkins-kaniko', containers: [
         containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.9.6', command: 'cat', ttyEnabled: true)
 ],
 volumes:[
-     secretVolume(secretName: 'docker-cred', mountPath: '/root'),
+
      hostPathVolume(mountPath: '/root/.m2/', hostPath: '/tmp/jenkins/.m2'),
 ], nodeSelector: 'beta.kubernetes.io/os=linux') {
      
