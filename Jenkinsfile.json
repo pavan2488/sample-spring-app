@@ -1,0 +1,26 @@
+{
+  "app": {
+    "name": "spring-demo",
+    "replicas": "1",
+    "cpu": "10m",
+    "memory": "128Mi",
+    "test": false
+  },
+  "container_repo": {
+    "host": "gcr.io/savvy-folio-279711",
+    "master_acct": "pushkar-bitwise",
+    "alt_acct": "pushkar-bitwise",
+    "jenkins_creds_id": "bitwise-gcr-secret",
+    "repo": "spring-demo",
+    "dockeremail": ".",
+    "dockerfile": "./",
+    "image_scanning": false
+  },
+  "pipeline": {
+      "enabled": true,
+      "debug": true,
+      "library": {
+        "branch": "master"
+      }
+  }
+}

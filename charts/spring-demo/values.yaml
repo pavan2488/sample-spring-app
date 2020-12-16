@@ -1,0 +1,14 @@
+# Default values for spring-demo
+# This is a YAML-formatted file.
+# Declare name/value pairs to be passed into your templates.
+# name: value
+serviceType: ClusterIP
+servicePort: 80
+containerPort: 8080
+component: "spring-demo"
+replicas: 1
+image: "gcr.io/savvy-folio-279711/spring-demo"
+imageTag: "latest"
+imagePullPolicy: "Always"
+cpu: "10m"
+memory: "128Mi"
