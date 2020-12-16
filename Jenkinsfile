@@ -6,7 +6,9 @@ def pipeline = new io.bitwise.Pipeline()
 
 podTemplate(label: 'jenkins-pipeline', containers: [
         containerTemplate(name: 'jnlp', image: 'lachlanevenson/jnlp-slave:3.10-1-alpine', args: '${computer.jnlpmac} ${computer.name}', workingDir: '/home/jenkins', resourceRequestCpu: '200m', resourceLimitCpu: '500m', resourceRequestMemory: '512Mi', resourceLimitMemory: '1024Mi'),
-        containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: 'cat', ttyEnabled: true),
+        containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug', command: 'cat', ttyEnabled: true,   envVars: [
+          secretEnvVar(key: 'GOOGLE_APPLICATION_CREDENTIALS', secretName: 'devops-gcr-key-key', secretKey: 'key.json') 
+        ]),
         containerTemplate(name: 'maven', image: 'jenkinsxio/builder-maven', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.8.2', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.9.6', command: 'cat', ttyEnabled: true)
@@ -51,49 +53,20 @@ volumes:[
     // compile tag list
     def image_tags_list = pipeline.getMapValues(image_tags_map)
 
-   /*stage ('compile and test') {
+   stage ('compile and test') {
 
       container('maven') {
-            
-
-               
-               sh 'mvn  clean install'
-                           
-
-
-      }
+            sh 'mvn  clean install'
+           }
     }
 
-    stage ('test deployment') {
-
-      container('helm') {
-
-        // run helm chart linter
-        pipeline.helmLint(chart_dir)
-
-        // run dry-run helm chart installation
-        pipeline.helmDeploy(
-          dry_run       : true,
-          name          : config.app.name,
-          namespace     : config.app.name,
-          chart_dir     : chart_dir,
-          set           : [
-            "imageTag": image_tags_list.get(0),
-            "replicas": config.app.replicas,
-            "cpu": config.app.cpu,
-            "memory": config.app.memory,
-            "ingress.hostname": config.app.hostname,
-          ]
-        )
-
-      }
-    } */
 
    container(name: 'kaniko', shell: '/busybox/sh') {
               
              sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=gcr.io/savvy-folio-279711/spring-demo"
     }
-/*
+
+          /*
     stage ('publish container') {
 
       container('docker') {
