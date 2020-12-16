@@ -56,7 +56,7 @@ volumes:[
    stage ('compile and test') {
 
       container('maven') {
-            sh 'mvn  clean install'
+            sh 'mvn  clean install -Dmaven.test.skip=true'
            }
     }
 
