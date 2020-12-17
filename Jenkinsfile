@@ -65,7 +65,7 @@ volumes:[
 
    container(name: 'kaniko', shell: '/busybox/sh') {
               
-             sh "/kaniko/executor --insecure --skip-tls-verify --dockerfile `pwd`/Dockerfile --context `pwd` --destination=gcr.io/savvy-folio-279711/spring-demo"
+             sh "/kaniko/executor --insecure --skip-tls-verify --dockerfile `pwd`/Dockerfile --context `pwd` --destination=gcr.io/savvy-folio-279711/spring-demo:${image_tags_list.get(0)}"
     }
 
           /*
